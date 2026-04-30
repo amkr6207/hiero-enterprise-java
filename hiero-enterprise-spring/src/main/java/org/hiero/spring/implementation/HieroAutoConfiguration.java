@@ -13,6 +13,7 @@ import org.hiero.base.TopicClient;
 import org.hiero.base.config.HieroConfig;
 import org.hiero.base.implementation.AccountClientImpl;
 import org.hiero.base.implementation.AccountRepositoryImpl;
+import org.hiero.base.implementation.BlockRepositoryImpl;
 import org.hiero.base.implementation.ContractRepositoryImpl;
 import org.hiero.base.implementation.FileClientImpl;
 import org.hiero.base.implementation.FungibleTokenClientImpl;
@@ -27,6 +28,7 @@ import org.hiero.base.implementation.TopicRepositoryImpl;
 import org.hiero.base.implementation.TransactionRepositoryImpl;
 import org.hiero.base.interceptors.ReceiveRecordInterceptor;
 import org.hiero.base.mirrornode.AccountRepository;
+import org.hiero.base.mirrornode.BlockRepository;
 import org.hiero.base.mirrornode.ContractRepository;
 import org.hiero.base.mirrornode.MirrorNodeClient;
 import org.hiero.base.mirrornode.NetworkRepository;
@@ -225,5 +227,15 @@ public class HieroAutoConfiguration {
   @Bean
   ContractVerificationClient contractVerificationClient(final HieroConfig hieroConfig) {
     return new ContractVerificationClientImplementation(hieroConfig);
+  }
+
+  @Bean
+  @ConditionalOnProperty(
+      prefix = "spring.hiero",
+      name = "mirrorNodeSupported",
+      havingValue = "true",
+      matchIfMissing = true)
+  BlockRepository blockRepository(final MirrorNodeClient mirrorNodeClient) {
+    return new BlockRepositoryImpl(mirrorNodeClient);
   }
 }
