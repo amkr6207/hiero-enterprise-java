@@ -77,30 +77,6 @@ public class HieroAccountService {
 All APIs of the client are synchronous and return the result of the operation.
 For asynchronous operations, you can easily wrap calls by use the [`@Async` annotation of spring](https://spring.io/guides/gs/async-method).
 
-### Hook lifecycle management
-
-`AccountClient` exposes hook lifecycle management via `updateAccountHooks(...)`.
-This operation delegates to Hedera SDK account update hook fields (`addHookToCreate`, `addHookToDelete`).
-
-```java
-import com.hedera.hashgraph.sdk.ContractId;
-import com.hedera.hashgraph.sdk.EvmHook;
-import java.util.List;
-import org.hiero.base.AccountClient;
-import org.hiero.base.data.Account;
-import org.hiero.base.data.HookDetails;
-import com.hedera.hashgraph.sdk.HookExtensionPoint;
-
-HookDetails hookToCreate =
-    new HookDetails(
-        HookExtensionPoint.ACCOUNT_ALLOWANCE_HOOK,
-        1001L,
-        new EvmHook(ContractId.fromString("0.0.5001")),
-        null);
-
-accountClient.updateAccountHooks(account, List.of(hookToCreate), List.of(77L));
-```
-
 ### Hiero Spring Sample
 
 A sample application that uses the Hiero Spring module can be found in the `hiero-enterprise-spring-sample` module.

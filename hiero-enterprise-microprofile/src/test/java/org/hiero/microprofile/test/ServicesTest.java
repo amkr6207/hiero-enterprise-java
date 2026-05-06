@@ -4,15 +4,12 @@ import io.helidon.microprofile.tests.junit5.AddBean;
 import io.helidon.microprofile.tests.junit5.Configuration;
 import io.helidon.microprofile.tests.junit5.HelidonTest;
 import jakarta.inject.Inject;
-import java.lang.reflect.Method;
-import java.util.List;
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.spi.ConfigProviderResolver;
 import org.hiero.base.AccountClient;
 import org.hiero.base.FileClient;
 import org.hiero.base.HookClient;
 import org.hiero.base.SmartContractClient;
-import org.hiero.base.data.Account;
 import org.hiero.base.protocol.ProtocolLayerClient;
 import org.hiero.microprofile.ClientProvider;
 import org.junit.jupiter.api.Assertions;
@@ -49,9 +46,5 @@ public class ServicesTest {
     Assertions.assertNotNull(hookClient);
     Assertions.assertNotNull(fileClient);
     Assertions.assertNotNull(smartContractClient);
-
-    final Method method =
-        AccountClient.class.getMethod("updateAccountHooks", Account.class, List.class, List.class);
-    Assertions.assertNotNull(method);
   }
 }

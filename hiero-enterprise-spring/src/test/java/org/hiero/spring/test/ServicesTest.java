@@ -1,12 +1,9 @@
 package org.hiero.spring.test;
 
-import java.lang.reflect.Method;
-import java.util.List;
 import org.hiero.base.AccountClient;
 import org.hiero.base.FileClient;
 import org.hiero.base.HookClient;
 import org.hiero.base.SmartContractClient;
-import org.hiero.base.data.Account;
 import org.hiero.base.protocol.ProtocolLayerClient;
 import org.hiero.base.verification.ContractVerificationClient;
 import org.junit.jupiter.api.Assertions;
@@ -37,9 +34,5 @@ public class ServicesTest {
     Assertions.assertNotNull(hookClient);
     Assertions.assertNotNull(fileServiceClient);
     Assertions.assertNotNull(smartContractServiceClient);
-
-    final Method method =
-        AccountClient.class.getMethod("updateAccountHooks", Account.class, List.class, List.class);
-    Assertions.assertNotNull(method);
   }
 }
